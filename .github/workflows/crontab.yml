@@ -27,12 +27,12 @@ jobs:
           echo "@reboot sh /home/pi/launcher.sh >/home/pi/logs/cronlog 2>&1" | crontab -
     - name: Compress the release image #lines 47-56 will upload the entire build image in a .xz format - just uncompress it and use raspi imager and the built file as well as all applicable packages installed above will be available
       run: |
-        sudo xz -T 0 -v ${{ steps.Build-Python-exe.outputs.image }}
+        sudo xz -T 0 -v ${{ steps.create_crontab.image }}
     - name: Upload the image artifact
       uses: actions/upload-artifact@v3 #uploads the image
       with:
         name: build_image
-        path: ${{ steps.Build-Python-exe.outputs.image }}.xz
+        path: ${{ steps.create_crontab.image }}.xz
         if-no-files-found: error
         retention-days: 10
 
