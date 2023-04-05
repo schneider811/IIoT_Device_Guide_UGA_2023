@@ -13,10 +13,6 @@ jobs:
     steps:
     - name: Checkout repo #checkout code so most up-to-date version is accessible to the runner
       uses: actions/checkout@main
-      with: 
-        lfs: true #lfs is github large file storage system
-    - name: checkout lfs object
-      run: git lfs checkout 
     - name: Build test
       uses: pguyot/arm-runner-action@main #this action emulates an ARM CPU and a desired operating system $pi_image
       id: create_crontab
@@ -25,6 +21,7 @@ jobs:
         copy_repository_path: /home/pi
         base_image: raspios_lite_arm64:latest
         commands: |
+          cd IIoT_Device_Guide_UGA_2023/
           ls -a
           chmod +x launcher.sh
           echo "@reboot sh /home/pi/launcher.sh >/home/pi/logs/cronlog 2>&1" | crontab -
