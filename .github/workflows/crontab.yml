@@ -13,7 +13,7 @@ jobs:
     steps:
     - name: Checkout repo #checkout code so most up-to-date version is accessible to the runner
       uses: actions/checkout@main
-    - name: Build test
+    - name: create_crontab
       uses: pguyot/arm-runner-action@main #this action emulates an ARM CPU and a desired operating system $pi_image
       id: create_crontab
       with:
@@ -27,12 +27,12 @@ jobs:
           echo "@reboot sh /home/pi/launcher.sh >/home/pi/logs/cronlog 2>&1" | crontab -
     - name: Compress the release image #lines 47-56 will upload the entire build image in a .xz format - just uncompress it and use raspi imager and the built file as well as all applicable packages installed above will be available
       run: |
-        sudo xz -T 0 -v ${{ steps.create_crontab.image }}
+        sudo xz -T 0 -v ${{ steps.create_crontab.outputs.image }}
     - name: Upload the image artifact
       uses: actions/upload-artifact@v3 #uploads the image
       with:
         name: build_image
-        path: ${{ steps.create_crontab.image }}.xz
+        path: ${{ steps.create_crontab.outputs.image }}.xz
         if-no-files-found: error
         retention-days: 10
 
