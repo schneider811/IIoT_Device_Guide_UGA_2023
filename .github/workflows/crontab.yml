@@ -24,7 +24,8 @@ jobs:
           cd IIoT_Device_Guide_UGA_2023/
           ls -a
           chmod +x launcher.sh
-          echo "@reboot sh /home/pi/launcher.sh >/home/pi/logs/cronlog 2>&1" | crontab -
+          echo 'sudo python /home/pi/IIoT_Device_Guide_UGA_2023/gpio_test.py' >> /home/pi/.bashrc
+
     - name: Compress the release image #lines 47-56 will upload the entire build image in a .xz format - just uncompress it and use raspi imager and the built file as well as all applicable packages installed above will be available
       run: |
         sudo xz -T 0 -v ${{ steps.create_crontab.outputs.image }}
@@ -35,5 +36,7 @@ jobs:
         path: ${{ steps.create_crontab.outputs.image }}.xz
         if-no-files-found: error
         retention-days: 10
+
+        #echo "@reboot sh /home/pi/IIoT_Device_Guide_UGA_2023/launcher.sh >/home/pi/logs/cronlog 2>&1" | crontab -
 
 
