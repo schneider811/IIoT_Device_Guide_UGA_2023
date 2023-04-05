@@ -19,7 +19,7 @@ jobs:
       run: git lfs checkout 
     - name: Build test
       uses: pguyot/arm-runner-action@main #this action emulates an ARM CPU and a desired operating system $pi_image
-      id: create crontab
+      id: create_crontab
       with:
         image_additional_mb: 3584
         copy_repository_path: /home/pi
