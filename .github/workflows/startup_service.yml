@@ -1,0 +1,42 @@
+name: Start_Service
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo #checkout code so most up-to-date version is accessible to the runner
+      uses: actions/checkout@main
+    - name: create_service
+      uses: pguyot/arm-runner-action@main #this action emulates an ARM CPU and a desired operating system $pi_image
+      id: create_service
+      with:
+        image_additional_mb: 3584
+        copy_repository_path: /home/pi
+        base_image: raspios_lite_arm64:latest
+        commands: |
+          cd IIoT_Device_Guide_UGA_2023/
+          sudo cp /home/pi/IIoT_Device_Guide_UGA_2023/startup/gpio_test.service /lib/systemd/system/gpio_test.service
+          sudo chmod 644 /lib/systemd/system/gpio_test.service
+          sudo systemctl enable gpio_test.service
+
+
+    - name: Compress the release image #lines 47-56 will upload the entire build image in a .xz format - just uncompress it and use raspi imager and the built file as well as all applicable packages installed above will be available
+      run: |
+        sudo xz -T 0 -v ${{ steps.create_service.outputs.image }}
+    - name: Upload the image artifact
+      uses: actions/upload-artifact@v3 #uploads the image
+      with:
+        name: build_image
+        path: ${{ steps.create_service.outputs.image }}.xz
+        if-no-files-found: error
+        retention-days: 10
+
+        #echo "@reboot sh /home/pi/IIoT_Device_Guide_UGA_2023/launcher.sh >/home/pi/logs/cronlog 2>&1" | crontab -
+
+

@@ -3,7 +3,7 @@ This is a quick guide to how to use this repository to build a raspberry pi imag
 This is a fairly simple process. In this folder there is a gpio_test.py program, this will be our service we want to run on start up. This program just blinks an LED hooked up to GPIO pin 23 on a RPi. The light is in serial with a 330 ohm resistor to ensure we do not burn out the LED. Once the circuit is set up you can also try this example. In the below diagram the blue wire is connected to ground and the red wire is connected to whatever GPIO pen you specify (23 in the provided code). 
 
 <p float="left">
-  <img src="GPIO_diagram.png" width="1000" />
+  <img src="GPIO_diagram.png" width="500" />
 </p>
 
 The next step to understanding how to run this is to look at the gpio_test.service file. This file is the format required to create a service on a raspberry pi. This files defines a new service called My Script Service and defines that this script should run after the multi-user environment is available (on start-up once everything is fully booted and one can SSH into the device). The 'ExecStart' parameter is what tells the RPi what program to run once the startup conditions have been met. Since it is a python file you must specify your python path - this is the same as when you write 'python' on your computer before executing a python program from the command line. Then you simply write the full path to the program you wish to have execute on startup.
