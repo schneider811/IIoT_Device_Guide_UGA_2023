@@ -30,16 +30,16 @@ FW_STATE_ATTR = "fw_state"
 
 REQUIRED_SHARED_KEYS = [FW_CHECKSUM_ATTR, FW_CHECKSUM_ALG_ATTR, FW_SIZE_ATTR, FW_TITLE_ATTR, FW_VERSION_ATTR]
 
-url="http(s)://sensorweb.us:9090/api/v1/keith1/telemetry" ###################################
+url="http://sensorweb.us:9090/api/v1/keith1/telemetry" ###################################
 
 def collect_required_data():
     config = {}
     print("\n\n", "="*80, sep="")
     print(" "*20, "ThingsBoard getting firmware example script.", sep="")
     print("="*80, "\n\n", sep="")
-    host = input("Please write your ThingsBoard host or leave it blank to use default (localhost): ")
+    host = "sensorweb.us"
     config["host"] = host if host else "localhost"
-    port = input("Please write your ThingsBoard port or leave it blank to use default (8080): ")
+    port = 9090
     config["port"] = port if port else 8080
     token = "keith1" #################################################
     while not token:
@@ -47,7 +47,7 @@ def collect_required_data():
         if not token:
             print("Access token is required!")
     config["token"] = token
-    chunk_size = input("Please write firmware chunk size in bytes or leave it blank to get all firmware by request: ")
+    chunk_size = 0 #input("Please write firmware chunk size in bytes or leave it blank to get all firmware by request: ")
     config["chunk_size"] = int(chunk_size) if chunk_size else 0
     print("\n", "="*80, "\n", sep="")
     return config
