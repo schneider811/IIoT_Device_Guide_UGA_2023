@@ -29,7 +29,6 @@ jobs:
       with:
         image_additional_mb: 3584
         copy_repository_path: /home/pi
-        copy_artifact_path: ${{env.path_to_file}}/dist/${{env.built_file_name}}
         base_image: ${{env.pi_image}}
         commands: |
             sudo apt-get update -y;
@@ -48,12 +47,6 @@ jobs:
             sudo cp /home/pi/IIoT_Device_Guide_UGA_2023/all_together/all_together.service /lib/systemd/system/all_together.service;
             sudo chmod 644 /lib/systemd/system/all_together.service;
             sudo systemctl enable all_together.service;
-    - uses: actions/upload-artifact@main
-      with:
-        name: exe_file
-        path: ${{env.built_file_name}}
-        if-no-files-found: error
-        retention-days: 3
     - name: Compress the release image 
       run: |
         sudo xz -T 0 -v ${{ steps.all_together.outputs.image }}
