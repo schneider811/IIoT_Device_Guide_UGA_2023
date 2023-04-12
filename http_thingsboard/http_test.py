@@ -2,13 +2,15 @@ import requests
 import time
 import random
 
-heart=random.uniform()
+
 
 url="http(s)://sensorweb.us:9090/api/v1/keith1/telemetry" ###################################
 
-data={"HeartRate":"58", "Temperature":"98.6"}
+
 
 
 while True:
-    response=requests.post(url,json=data)
-    time.sleep(5)
+    data={"HeartRate":random.randint(45,90), "Temperature":random.uniform(90,103)}
+    print(data)
+    #response=requests.post(url,json=data)
+    time.sleep(1)
