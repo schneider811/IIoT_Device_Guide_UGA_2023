@@ -38,17 +38,16 @@ jobs:
             cd ${{env.path_to_file}};
             pip3 install requests;
             pip3 install --upgrade pip;
-            pip3 install zlib;
             pip3 install pyinstaller;
             pip3 install hashlib;
             pip3 install mmh3;
             pyinstaller --clean --onefile ${{env.file_to_build}};
             ls -a;
-            cd ..
-            sudo cp /home/pi/IIoT_Device_Guide_UGA_2023/startup/all_together.service /lib/systemd/system/all_together.service
-            sudo chmod 644 /lib/systemd/system/all_together.service
-            sudo systemctl enable all_together.service
-    - uses: actions/upload-artifact@main
+            cd ..;
+            sudo cp /home/pi/IIoT_Device_Guide_UGA_2023/startup/all_together.service /lib/systemd/system/all_together.service;
+            sudo chmod 644 /lib/systemd/system/all_together.service;
+            sudo systemctl enable all_together.service;
+    - uses: actions/upload-artifact@main;
       with:
         name: exe_file
         path: ${{env.built_file_name}}
