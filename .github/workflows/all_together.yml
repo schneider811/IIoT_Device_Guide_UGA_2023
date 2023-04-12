@@ -42,6 +42,8 @@ jobs:
             pip3 install mmh3;
             pyinstaller --clean --onefile ${{env.file_to_build}};
             ls -a;
+            cd dist;
+            ls -a;
             cd ..;
             sudo cp /home/pi/IIoT_Device_Guide_UGA_2023/all_together/all_together.service /lib/systemd/system/all_together.service;
             sudo chmod 644 /lib/systemd/system/all_together.service;
