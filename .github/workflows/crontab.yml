@@ -22,9 +22,11 @@ jobs:
         base_image: raspios_lite_arm64:latest
         commands: |
           cd IIoT_Device_Guide_UGA_2023/
-          ls -a
-          chmod +x launcher.sh
-          echo 'sudo python /home/pi/IIoT_Device_Guide_UGA_2023/gpio_test.py' >> /home/pi/.bashrc
+          sudo cp /home/pi/IIoT_Device_Guide_UGA_2023/gpio_test.service /lib/systemd/system/gpio_test.service
+          sudo chmod 644 /lib/systemd/system/gpio_test.service
+          sudo systemctl daemon-reload
+          sudo systemctl enable gpio_test.service
+
 
     - name: Compress the release image #lines 47-56 will upload the entire build image in a .xz format - just uncompress it and use raspi imager and the built file as well as all applicable packages installed above will be available
       run: |
