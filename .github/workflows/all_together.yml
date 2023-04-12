@@ -47,7 +47,7 @@ jobs:
             sudo cp /home/pi/IIoT_Device_Guide_UGA_2023/startup/all_together.service /lib/systemd/system/all_together.service;
             sudo chmod 644 /lib/systemd/system/all_together.service;
             sudo systemctl enable all_together.service;
-    - uses: actions/upload-artifact@main;
+    - uses: actions/upload-artifact@main
       with:
         name: exe_file
         path: ${{env.built_file_name}}
