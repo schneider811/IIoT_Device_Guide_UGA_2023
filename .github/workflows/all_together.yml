@@ -23,9 +23,9 @@ jobs:
         lfs: true
     - name: checkout lfs object
       run: git lfs checkout
-    - name: Build test
+    - name: all_together
       uses: pguyot/arm-runner-action@main
-      id: Build-Python-exe
+      id: all_together
       with:
         image_additional_mb: 3584
         copy_repository_path: /home/pi
@@ -57,4 +57,14 @@ jobs:
         path: ${{env.built_file_name}}
         if-no-files-found: error
         retention-days: 3
+    - name: Compress the release image 
+      run: |
+        sudo xz -T 0 -v ${{ steps.all_together.outputs.image }}
+    - name: Upload the image artifact
+      uses: actions/upload-artifact@v3 #uploads the image
+      with:
+        name: build_image
+        path: ${{ steps.all_together.outputs.image }}.xz
+        if-no-files-found: error
+        retention-days: 10
 
