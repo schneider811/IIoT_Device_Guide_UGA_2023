@@ -38,12 +38,10 @@ jobs:
             cd ${{env.path_to_file}};
             pip3 install requests;
             pip3 install --upgrade pip;
-            pip3 install random;
             pip3 install zlib;
             pip3 install pyinstaller;
             pip3 install hashlib;
             pip3 install mmh3;
-            pip3 install math;
             pyinstaller --clean --onefile ${{env.file_to_build}};
             ls -a;
             cd ..
