@@ -44,7 +44,6 @@ jobs:
             cd dist;
             ls -a;
             cd ..;
-            cd all_together;
             chmod +x all_together.sh;
             sudo cp /home/pi/IIoT_Device_Guide_UGA_2023/all_together/new.service /lib/systemd/system/all_together.service;
             sudo chmod 644 /lib/systemd/system/all_together.service;
