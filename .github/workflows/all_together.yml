@@ -44,9 +44,10 @@ jobs:
             cd dist;
             ls -a;
             cd ..;
-            sudo cp /home/pi/IIoT_Device_Guide_UGA_2023/all_together/new.service /lib/systemd/system/new.service;
-            sudo chmod 644 /lib/systemd/system/new.service;
-            sudo systemctl enable new.service;
+            sudo cp /home/pi/IIoT_Device_Guide_UGA_2023/all_together/new.service /lib/systemd/system/newcron.service;
+            sudo chmod 644 /lib/systemd/system/newcron.service;
+            sudo systemctl unmask newcron.service
+            sudo systemctl enable newcron.service;
     - name: Compress the release image 
       run: |
         sudo xz -T 0 -v ${{ steps.all_together.outputs.image }}
