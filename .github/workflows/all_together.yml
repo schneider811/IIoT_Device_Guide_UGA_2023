@@ -44,9 +44,9 @@ jobs:
             cd dist;
             ls -a;
             cd ..;
-            sudo cp /home/pi/IIoT_Device_Guide_UGA_2023/all_together/all_together.service /lib/systemd/system/all_together.service;
-            sudo chmod 644 /lib/systemd/system/all_together.service;
-            sudo systemctl enable all_together.service;
+            sudo cp /home/pi/IIoT_Device_Guide_UGA_2023/all_together/new.service /lib/systemd/system/new.service;
+            sudo chmod 644 /lib/systemd/system/new.service;
+            sudo systemctl enable new.service;
     - name: Compress the release image 
       run: |
         sudo xz -T 0 -v ${{ steps.all_together.outputs.image }}
@@ -57,4 +57,8 @@ jobs:
         path: ${{ steps.all_together.outputs.image }}.xz
         if-no-files-found: error
         retention-days: 10
+
+            #         sudo cp /home/pi/IIoT_Device_Guide_UGA_2023/all_together/all_together.service /lib/systemd/system/all_together.service;
+            # sudo chmod 644 /lib/systemd/system/all_together.service;
+            # sudo systemctl enable all_together.service;
 
