@@ -4,7 +4,7 @@
 
  [Service]
  Type=idle
- ExecStart=/home/pi/IIoT_Device_Guide_UGA_2023/all_together/dist/all_together.sh
+ ExecStart=/home/pi/IIoT_Device_Guide_UGA_2023/all_together/all_together.sh
 
  [Install]
  WantedBy=multi-user.target
