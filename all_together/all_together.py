@@ -141,7 +141,6 @@ if __name__ == '__main__':
         "current_fw_version": None
     }
     send_telemetry(current_firmware_info)
-
     print(f"Getting firmware info from {config['host']}:{config['port']}..")
     while True:
         
