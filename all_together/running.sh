@@ -7,5 +7,5 @@ then
     echo "$SERVICE is running at $now"
 else
     echo "$SERVICE stopped at $now"
-    sudo /usr/bin/python3 $ADCDRIVER/$SERVICE 
+    sudo ./$ADCDRIVER/$SERVICE 
 fi
