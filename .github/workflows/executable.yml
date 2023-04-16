@@ -7,43 +7,39 @@ on:
     branches: [ "main" ]
   workflow_dispatch:
 env:
-  file_to_build: algo_VTCN.py #file you want to build
-  pi_image: raspios_lite_arm64:latest #image you want to use need 64 bit image for pytorch
-  path_to_file: IIoT_Device_Guide_UGA_2023/build_executable #folder that $file_to_build is in
-  built_file_name: algo_VTCN #name of the built file
+  file_to_build: build_executable.py
+  pi_image: raspios_lite_arm64:latest 
+  path_to_file: IIoT_Device_Guide_UGA_2023/build_executable
+  built_file_name: built_file
 
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repo #checkout code so most up-to-date version is accessible to the runner
+    - name: Checkout repo
       uses: actions/checkout@main
       with: 
-        lfs: true #lfs is github large file storage system
+        lfs: true
     - name: checkout lfs object
       run: git lfs checkout
-    - name: Build test
-      uses: pguyot/arm-runner-action@main #this action emulates an ARM CPU and a desired operating system $pi_image
-      id: Build-Python-exe
+    - name: all_together
+      uses: pguyot/arm-runner-action@main
+      id: all_together
       with:
         image_additional_mb: 3584
         copy_repository_path: /home/pi
-        copy_artifact_path: ${{env.path_to_file}}/dist/${{env.built_file_name}}
-        base_image: ${{env.pi_image}} #defined in line 11. Lines 34 - 46 does the bulk of the work to build the executable file and the image. to build the executable you need to install all packages you will be using and then use pyinstaller to create the .exe. If you use the image that this yml uploads all of the packages will be present as well as the built file.
+        base_image: ${{env.pi_image}}
         commands: |
             sudo apt-get update -y;
             pwd;
             apt-get install -y python3 python3-venv python3-dev python3-pip; 
             cd ${{env.path_to_file}};
-            pip3 install torch;
+            pip3 install requests;
             pip3 install --upgrade pip;
-            pip3 install numpy --upgrade;
-            pip3 install -U scikit-learn;
-            pip3 install -U matplotlib;
-            pip3 install pyinstaller==5.6;
-            pip3 install nvidia-ml-py3;
-            pyinstaller --clean --onefile ${{env.file_to_build}};
+            pip3 install pyinstaller;
+            pip3 install mmh3;
+            pyinstaller --clean --onefile ${{env.file_to_build}} -n built_file;
     - uses: actions/upload-artifact@main
       with:
         name: exe_file
