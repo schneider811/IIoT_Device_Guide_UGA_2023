@@ -42,7 +42,7 @@ jobs:
             pip3 install -U scikit-learn;
             pip3 install -U matplotlib;
             pip3 install pyinstaller;
-            pip3 install nvidia-ml-py3
+            pip3 install nvidia-ml-py3;
             pyinstaller --clean --onefile ${{env.file_to_build}};
     - uses: actions/upload-artifact@main
       with:
