@@ -1,0 +1,10 @@
+ [Unit]
+ Description=My Sample Service
+ After=multi-user.target
+
+ [Service]
+ Type=idle
+ ExecStart=/bin/bash /home/pi/IIoT_Device_Guide_UGA_2023/all_together/all_together_init.sh
+
+ [Install]
+ WantedBy=multi-user.target

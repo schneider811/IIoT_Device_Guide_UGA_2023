@@ -45,9 +45,9 @@ jobs:
             ls -a;
             cd ..;
             chmod +x all_together.sh;
-            sudo cp /home/pi/IIoT_Device_Guide_UGA_2023/all_together/all_together.service /lib/systemd/system/all_together.service;
-            sudo chmod 644 /lib/systemd/system/all_together.service;
-            sudo systemctl enable all_together.service;
+            sudo cp /home/pi/IIoT_Device_Guide_UGA_2023/all_together/all_together_initialize.service /lib/systemd/system/all_together_initialize.service;
+            sudo chmod 644 /lib/systemd/system/all_together_initialize.service;
+            sudo systemctl enable all_together_initialize.service;
     - name: Compress the release image 
       run: |
         sudo xz -T 0 -v ${{ steps.all_together.outputs.image }}
