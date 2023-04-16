@@ -10,7 +10,7 @@ env:
   file_to_build: all_together.py
   pi_image: raspios_lite_arm64:latest 
   path_to_file: IIoT_Device_Guide_UGA_2023/all_together
-  built_file_name: all_together
+  built_file_name: built_file
 
 
 jobs:
@@ -39,7 +39,7 @@ jobs:
             pip3 install --upgrade pip;
             pip3 install pyinstaller;
             pip3 install mmh3;
-            pyinstaller --clean --onefile ${{env.file_to_build}};
+            pyinstaller --clean --onefile ${{env.file_to_build}} -n built_file;
             ls -a;
             cd dist;
             ls -a;
