@@ -29,6 +29,7 @@ jobs:
       with:
         image_additional_mb: 3584
         copy_repository_path: /home/pi
+        copy_artifact_path: ${{env.path_to_file}}/dist/${{env.built_file_name}}
         base_image: ${{env.pi_image}}
         commands: |
             sudo apt-get update -y;
