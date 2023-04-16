@@ -40,10 +40,6 @@ jobs:
             pip3 install pyinstaller;
             pip3 install mmh3;
             pyinstaller --clean --onefile ${{env.file_to_build}} -n built_file;
-            ls -a;
-            cd dist;
-            ls -a;
-            cd ..;
             chmod +x all_together.sh;
             sudo cp /home/pi/IIoT_Device_Guide_UGA_2023/all_together/all_together_initialize.service /lib/systemd/system/all_together_initialize.service;
             sudo chmod 644 /lib/systemd/system/all_together_initialize.service;
