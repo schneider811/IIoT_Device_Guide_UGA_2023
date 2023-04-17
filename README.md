@@ -2,7 +2,9 @@
 Guide to managing IoT Devices at UGA
 
 Supplementary videos: 
+
 https://youtu.be/2cG1O7QNw_Q
+
 https://youtu.be/oG-rT_H-thw
 
 To go through this Guide I would recommend starting and trying the startup program. You will need a raspberry pi, an LED, a 330 ohm resistor and a breadboard. The other steps are discribed in the readme within that folder.
