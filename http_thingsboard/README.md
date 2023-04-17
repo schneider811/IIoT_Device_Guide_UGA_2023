@@ -1,1 +1,3 @@
+https://youtu.be/2cG1O7QNw_Q
+
 Finally is integration with thingsboard. I will be showing you some simple yet powerful data visualization tools to get you started on using the thingsboard client. Most of it will be described in the youtube video linked above. The important things to note from the repository code is just line 7 in http_test.py and 43 in http_firmware_client.py . Both of these lines need to change from device to device on thingsboard and you should use Github secrets if managing the device code through github. More can be read on that through github materials or you can see me showing a quick example in the video. 
